@@ -34,7 +34,11 @@ router.post(
 
 router.post("/register", (req, res, next) => {
 	const { username, password } = req.body;
-	const user = new User({ username, password });
+	const user = new User({
+		username: username,
+		password: password,
+		points: 0
+	});
 	user.save((err, user) => {
 		req.login(user, function(err) {
 			if (err) {

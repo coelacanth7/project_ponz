@@ -4,7 +4,12 @@ const uniqueValidator = require("mongoose-unique-validator");
 
 const UserSchema = mongoose.Schema({
 	username: { type: String, required: true, unique: true },
-	passwordHash: { type: String }
+	passwordHash: { type: String },
+	points: Number,
+	// only one direct parent
+	parent: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+	// only direct children
+	children: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }]
 });
 
 UserSchema.plugin(uniqueValidator);
