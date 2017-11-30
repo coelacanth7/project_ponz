@@ -6,7 +6,7 @@ var register = function(Handlebars) {
 		// put all of your helpers inside this object
 		increment: function(value) {
 			console.log("increment");
-			return value + 2;
+			return value + 4;
 		},
 		bar: function() {
 			return "BAR";

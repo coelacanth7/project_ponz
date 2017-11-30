@@ -1,5 +1,6 @@
 {{#each child.children as |child|}}
   <li class="list-group-item" style="margin-left: {{../indent}}0px;">
+    <span style="color: green;">${{child.points}}.00</span>
     {{child.username}}
 
     {{#if child.children.length }}

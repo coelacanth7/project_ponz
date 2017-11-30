@@ -27,12 +27,34 @@ UserSchema.virtual("password")
 		this.passwordHash = bcrypt.hashSync(value, 8);
 	});
 
+// infinitely populate children
 const populateChildren = function(next) {
 	this.populate("children");
 	next();
 };
-
 UserSchema.pre("find", populateChildren).pre("findOne", populateChildren);
+
+// transverse pyramid
+function pointFinder(distance) {
+	const points = [40, 20, 10, 5, 2];
+	var value;
+	distance < 5 ? (value = points[distance]) : (value = 1);
+	return value;
+}
+
+UserSchema.methods.addPoints = async function() {
+	var distance = 0;
+	var user = this;
+	while (user.parent) {
+		var parent = await User.findById(user.parent);
+		if (parent) {
+			parent.points += pointFinder(distance);
+			parent.save();
+			distance++;
+		}
+		user = parent;
+	}
+};
 
 const User = mongoose.model("User", UserSchema);
 

@@ -3,20 +3,21 @@
 <div class="">
   <h3>give this link to your friends:</h3>
   <h2><a href="/ponzert/{{user.id}}">http://localhost:3000/ponzert/{{user.id}}</a></h2>
-  <h3>Youre Score: {{user.points}}</h3>
+  <h3>Youre $: ${{user.points}}.00</h3>
 </div>
 
 <div class="row">
-  <div class="card">
+  <div class="card" style="width: 90%;">
     <div class="card-body">
       <h4 class="card-title">Your Ponzerts:</h4>
       <h6 class="card-subtitle mb-2 text-muted">Get em</h6>
       <ul class="list-group list-group-flush">
         {{#each user.children as |child|}}
           <li class="list-group-item">
+            <span style="color: green;">${{child.points}}.00</span>
             {{child.username}}
           </li>
-          {{> userpartial child=child indent=1}}
+          {{> userpartial child=child indent=3}}
         {{/each}}
       </ul>
     </div>

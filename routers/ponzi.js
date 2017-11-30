@@ -37,6 +37,7 @@ router.post("/ponzert", async (req, res) => {
 
 	// save new user and redirect
 	user.save((err, user, next) => {
+		user.addPoints();
 		req.login(user, function(err) {
 			if (err) {
 				return console.error(err);
