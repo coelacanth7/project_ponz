@@ -33,21 +33,13 @@ router.post("/ponzert", (req, res) => {
 	});
 
 	// update parent
-	User.update(
-		{ _id: refferalid },
-		{
-			$push: { children: user._id }
-		},
-		err => {
-			if (err) throw err;
-		}
-	);
+	User.update({ _id: refferalid }, { $push: { children: user._id } });
 
 	// save new user and redirect
-	user.save((err, user) => {
+	user.save((err, user, next) => {
 		req.login(user, function(err) {
 			if (err) {
-				return next(err);
+				return console.error(err);
 			}
 			return res.redirect("/");
 		});

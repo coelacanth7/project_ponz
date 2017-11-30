@@ -27,6 +27,13 @@ UserSchema.virtual("password")
 		this.passwordHash = bcrypt.hashSync(value, 8);
 	});
 
+const populateChildren = function(next) {
+	this.populate("children");
+	next();
+};
+
+UserSchema.pre("find", populateChildren).pre("findOne", populateChildren);
+
 const User = mongoose.model("User", UserSchema);
 
 module.exports = User;

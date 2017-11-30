@@ -1,0 +1,9 @@
+{{#each child.children as |child|}}
+  <li class="list-group-item" style="margin-left: {{../indent}}0px;">
+    {{child.username}}
+
+    {{#if child.children.length }}
+      {{> userpartial child=child indent=(increment ../indent)}}
+    {{/if}}
+  </li>
+{{/each}}

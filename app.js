@@ -79,7 +79,16 @@ app.use(morganToolkit());
 
 // Set up express-handlebars
 const exhbs = require("express-handlebars");
-app.engine("handlebars", exhbs({ defaultLayout: "layout" }));
+
+app.engine(
+	"handlebars",
+	exhbs({
+		defaultLayout: "layout",
+		partialsDir: "views/partial/",
+		helpers: require("./helpers/handlebars.js").helpers
+	})
+);
+// app.engine("handlebars", exhbs.engine);
 app.set("view engine", "handlebars");
 
 // routes
