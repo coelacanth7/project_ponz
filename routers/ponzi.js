@@ -23,7 +23,7 @@ router.get("/ponzert/:referralid", (req, res) => {
 });
 
 // sign up under a friend
-router.post("/ponzert", (req, res) => {
+router.post("/ponzert", async (req, res) => {
 	const { username, password, refferalid } = req.body;
 	const user = new User({
 		username: username,
@@ -33,7 +33,7 @@ router.post("/ponzert", (req, res) => {
 	});
 
 	// update parent
-	User.update({ _id: refferalid }, { $push: { children: user._id } });
+	await User.update({ _id: refferalid }, { $push: { children: user._id } });
 
 	// save new user and redirect
 	user.save((err, user, next) => {
